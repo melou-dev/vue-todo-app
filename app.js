@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const LOCAL_STORAGE_KEY = 'todo-app-vue';
 const todoComponent = Vue.component('todo-app', {
   data() {
@@ -32,23 +33,65 @@ const todoComponent = Vue.component('todo-app', {
         this.todos.push({ text: this.newTodo, isDone: false });
         this.newTodo = null;
       }
+=======
+const LOCAL_STORAGE_KEY = "todo-app-vue";
+
+const todoApp = new Vue({
+  el: ".todoapp",
+  data: {
+    title: "Todos",
+    todos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [
+      { text: "Learn JavaScript ES6+ goodies", isDone: true },
+      { text: "Learn Vue", isDone: false },
+      { text: "Build something awesome", isDone: false }
+    ],
+    editing: null
+  },
+  methods: {
+    createTodo(event) {
+      const textbox = event.target;
+      this.todos.push({ text: textbox.value.trim(), isDone: false });
+      textbox.value = "";
+    },
+    startEditing(todo) {
+      this.editing = todo;
+    },
+    finishEditing(event) {
+      if (!this.editing) {
+        return;
+      }
+      const textbox = event.target;
+      this.editing.text = textbox.value.trim();
+      this.editing = null;
+    },
+    cancelEditing() {
+      this.editing = null;
+    },
+    destroyTodo(todo) {
+      const index = this.todos.indexOf(todo);
+      this.todos.splice(index, 1);
+>>>>>>> start-here
     },
     clearCompleted() {
       this.todos = this.activeTodos;
     }
   },
   computed: {
+<<<<<<< HEAD
     itemsLeft() {
       return this.todos.filter(t => !t.isDone).length;
     },
     status() {
       return this.$route.params.status;
     },
+=======
+>>>>>>> start-here
     activeTodos() {
       return this.todos.filter(t => !t.isDone);
     },
     completedTodos() {
       return this.todos.filter(t => t.isDone);
+<<<<<<< HEAD
     },
     filteredTodos () {
       switch (this.status) {
@@ -60,6 +103,8 @@ const todoComponent = Vue.component('todo-app', {
         default:
           return this.todos;
       }
+=======
+>>>>>>> start-here
     }
   },
   watch: {
@@ -69,6 +114,7 @@ const todoComponent = Vue.component('todo-app', {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newValue));
       }
     }
+<<<<<<< HEAD
   },
   template: `
     <div>
@@ -146,3 +192,7 @@ const router = new VueRouter({
 const app = new Vue({
   router
 }).$mount('#app')
+=======
+  }
+});
+>>>>>>> start-here
