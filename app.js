@@ -1,19 +1,18 @@
-<<<<<<< HEAD
-const LOCAL_STORAGE_KEY = 'todo-app-vue';
-const todoComponent = Vue.component('todo-app', {
+const LOCAL_STORAGE_KEY = "todo-app-vue";
+const todoComponent = Vue.component("todo-app", {
   data() {
     return {
       todos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [
-        { text: 'Learn JavaScript ES6+ goodies', isDone: true },
-        { text: 'Learn Vue', isDone: false },
-        { text: 'Build something awesome', isDone: false },
+        { text: "Learn JavaScript ES6+ goodies", isDone: true },
+        { text: "Learn Vue", isDone: false },
+        { text: "Build something awesome", isDone: false }
       ],
       editingTodo: null,
-      newTodo: null,
-    }
+      newTodo: null
+    };
   },
   methods: {
-    destroy (todo) {
+    destroy(todo) {
       const index = this.todos.indexOf(todo);
       this.todos.splice(index, 1);
     },
@@ -33,78 +32,34 @@ const todoComponent = Vue.component('todo-app', {
         this.todos.push({ text: this.newTodo, isDone: false });
         this.newTodo = null;
       }
-=======
-const LOCAL_STORAGE_KEY = "todo-app-vue";
-
-const todoApp = new Vue({
-  el: ".todoapp",
-  data: {
-    title: "Todos",
-    todos: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [
-      { text: "Learn JavaScript ES6+ goodies", isDone: true },
-      { text: "Learn Vue", isDone: false },
-      { text: "Build something awesome", isDone: false }
-    ],
-    editing: null
-  },
-  methods: {
-    createTodo(event) {
-      const textbox = event.target;
-      this.todos.push({ text: textbox.value.trim(), isDone: false });
-      textbox.value = "";
-    },
-    startEditing(todo) {
-      this.editing = todo;
-    },
-    finishEditing(event) {
-      if (!this.editing) {
-        return;
-      }
-      const textbox = event.target;
-      this.editing.text = textbox.value.trim();
-      this.editing = null;
-    },
-    cancelEditing() {
-      this.editing = null;
-    },
-    destroyTodo(todo) {
-      const index = this.todos.indexOf(todo);
-      this.todos.splice(index, 1);
->>>>>>> start-here
     },
     clearCompleted() {
       this.todos = this.activeTodos;
     }
   },
   computed: {
-<<<<<<< HEAD
     itemsLeft() {
       return this.todos.filter(t => !t.isDone).length;
     },
     status() {
       return this.$route.params.status;
     },
-=======
->>>>>>> start-here
     activeTodos() {
       return this.todos.filter(t => !t.isDone);
     },
     completedTodos() {
       return this.todos.filter(t => t.isDone);
-<<<<<<< HEAD
     },
-    filteredTodos () {
+    filteredTodos() {
       switch (this.status) {
-        case 'active':
+        case "active":
           return this.activeTodos;
-        case 'completed':
+        case "completed":
           return this.completedTodos;
 
         default:
           return this.todos;
       }
-=======
->>>>>>> start-here
     }
   },
   watch: {
@@ -114,7 +69,6 @@ const todoApp = new Vue({
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newValue));
       }
     }
-<<<<<<< HEAD
   },
   template: `
     <div>
@@ -172,27 +126,17 @@ const todoApp = new Vue({
           <button class="clear-completed" @click="clearCompleted">Clear completed</button>
         </footer>
       </section>
-
-      <footer class="info">
-        <p>Double-click to edit a todo</p>
-        <p>Esc to cancel edit</p>
-        <p>Enter to accept edit</p>
-      </footer>
-    </div>`,
+   </div>`
 });
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   routes: [
-    { path: '/:status', component: { template: `<todo-app></todo-app>`} },
-    { path: '*', redirect: '/all' },
+    { path: "/:status", component: { template: `<todo-app></todo-app>` } },
+    { path: "*", redirect: "/all" }
   ]
 });
 
 const app = new Vue({
   router
-}).$mount('#app')
-=======
-  }
-});
->>>>>>> start-here
+}).$mount("#app");
